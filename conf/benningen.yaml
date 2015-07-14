@@ -1,0 +1,38 @@
+config:
+
+    verbose: True
+    debug: False
+
+    domain: senbazuru.midokura.de
+
+roles:
+    zookeeper:
+    - s001
+
+    cassandra:
+    - s001
+
+    midonet_agents:
+    - s001
+
+    midonet_gateways:
+    - s001
+
+    midonet_api:
+    - s002
+
+    midonet_manager:
+    - s002
+
+servers:
+
+    s001:
+        internal_ip: 192.168.4.118
+        ip: 192.168.4.118
+        network: 172.16.0.0/22
+
+    s002:
+        internal_ip: 192.168.4.120
+        ip: 192.168.4.120
+        network: 172.16.0.0/22
+

@@ -1,0 +1,99 @@
+config:
+
+    verbose: True
+    debug: False
+
+    domain: senbazuru.midokura.de
+
+    iperf3_througput_test_sequence: 4000M 400M 40M 4M
+    iperf3_test_iterations: 2 4 6 8 10 20 40
+    iperf3_retry_factor: 1
+    # in seconds
+    iperf3_retry_wait: 10
+
+roles:
+    zookeeper:
+    - s001
+    - s002
+    - s003
+
+    cassandra:
+    - s001
+    - s002
+    - s003
+
+    midonet_agents:
+    - s005
+    - s006
+    - s007
+
+    midonet_gateways:
+    - gw001
+    - gw002
+    - gw003
+
+    midonet_api:
+    - s004
+
+    midonet_manager:
+    - s004
+
+servers:
+
+    gw001:
+        ip: 119.15.125.241
+        network: 172.16.0.0/22
+        # these ips will be used for the fakeuplinks to the alexrouter
+        uplink_network: 192.168.5.0
+        uplink: 192.168.5.1
+        overlay: 192.168.5.2
+
+    gw002:
+        ip: 119.15.125.243
+        network: 172.16.4.0/22
+        uplink_network: 192.168.6.0
+        uplink: 192.168.6.1
+        overlay: 192.168.6.2
+
+    gw003:
+        ip: 119.15.125.244
+        network: 172.16.8.0/22
+        uplink_network: 192.168.7.0
+        uplink: 192.168.7.1
+        overlay: 192.168.7.2
+
+    s001:
+        # set internal_ip as the same one as ip if you dont have a private interface
+        # in clouds with fips the vm does not know the fip and cannot bind() it in cassandra,
+        # you have to use the local ip for this
+        internal_ip: 192.168.77.34
+        ip: 119.15.125.247
+        network: 172.16.12.0/22
+
+    s002:
+        internal_ip: 192.168.77.31
+        ip: 119.15.125.248
+        network: 172.16.16.0/22
+
+    s003:
+        internal_ip: 192.168.77.26
+        ip: 119.15.125.249
+        network: 172.16.20.0/22
+
+    s004:
+        internal_ip: 192.168.77.25
+        ip: 119.15.125.250
+        network: 172.16.24.0/22
+
+    s005:
+        ip: 119.15.125.251
+        network: 172.16.28.0/22
+
+    s006:
+        ip: 119.15.125.254
+        network: 172.16.32.0/22
+
+    s007:
+        ip: 119.15.125.255
+        network: 172.16.36.0/22
+
